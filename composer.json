@@ -1,0 +1,37 @@
+{
+	"name": "neoncitylights/mediawiki-docs",
+	"authors": [
+		{
+			"name": "Samantha Nguyen"
+		}
+	],
+	"license": "MIT",
+	"description": "Allows automatically retrieving information about MediaWiki hooks",
+	"autoload": {
+		"psr-4": {
+			"Neoncitylights\\MediaWikiDocs\\": "src/"
+		}
+	},
+	"require": {
+		"roave/better-reflection": "^4.12",
+		"phpdocumentor/reflection-docblock": "^5.2"
+	},
+	"require-dev": {
+		"mediawiki/mediawiki-codesniffer": "33.0.0",
+		"mediawiki/minus-x": "1.1.0",
+		"php-parallel-lint/php-console-highlighter": "0.5.0",
+		"php-parallel-lint/php-parallel-lint": "1.2.0",
+		"phpunit/phpunit": "^9.4"
+	},
+	"scripts": {
+		"test": [
+			"parallel-lint . --exclude vendor --exclude node_modules",
+			"minus-x check .",
+			"phpcs -p -s"
+		],
+		"fix": [
+			"minus-x fix .",
+			"phpcbf"
+		]
+	}
+}
