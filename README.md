@@ -3,7 +3,7 @@
 It is currently experimental, and thus the public API may be changed at any time, until a stable version releases.
 
 ## Software requirements
-* MediaWiki: 1.35.0+ (**NOTE**: the MediaWiki core software only needs to exist in the file system)
+* MediaWiki: master branch (**NOTE**: the MediaWiki core software only needs to exist in the file system)
 * PHP: 7.4.0+
 
 ## Usage
