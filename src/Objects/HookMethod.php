@@ -34,4 +34,36 @@ class HookMethod {
 	public function getParameters() : array {
 		return $this->parameters;
 	}
+
+	/**
+	 * @return string
+	 */
+	public function getAsInterfaceMethod() : string {
+		$parameters = [];
+		foreach( $this->parameters as $parameter ) {
+			$parameters[] = $parameter->getAsTypedString();
+		}
+
+		return sprintf(
+			"public function %s( %s );",
+			$this->name,
+			implode(", ", $parameters )
+		);
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getAsTypedStaticMethod() : string {
+		$parameters = [];
+		foreach( $this->parameters as $parameter ) {
+			$parameters[] = $parameter->getAsTypedString();
+		}
+
+		return sprintf(
+			"public static function %s( %s ) {}",
+			$this->name,
+			implode(", ", $parameters )
+		);
+	}
 }

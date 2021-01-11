@@ -37,7 +37,7 @@ class HookDirectoryStore {
 		return $this->hookDirectories;
 	}
 
-	public function clearDirectories(): void {
+	public function clear(): void {
 		$this->hookDirectories = [];
 	}
 }

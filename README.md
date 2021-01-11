@@ -8,13 +8,14 @@ It is currently experimental, and thus the public API may be changed at any time
 
 ## Usage
 ```php
+<?php
 use Neoncitylights\MediaWikiDocs\Services\HookDataStore;
 use Neoncitylights\MediaWikiDocs\Services\HookDirectoryStore;
 use Neoncitylights\MediaWikiDocs\Services\HookFactory;
 use phpDocumentor\Reflection\DocBlockFactory;
 
-$mediaWikiPath = __DIR__ . '/mediawiki';
-$hookDirectoryStore = new HookDirectoryStore( $mediaWikiPath );
+$includePath = __DIR__ . '/mediawiki';
+$hookDirectoryStore = new HookDirectoryStore( $includePath );
 $hookDataStore = new HookDataStore( $hookDirectoryStore );
 $hookFactory = new HookFactory( DocBlockFactory::createInstance() );
 
@@ -23,9 +24,12 @@ $classes = $hookDataStore->loadHookData();
 $hookNames = [];
 foreach( $classes as $class ) {
 	$hook = $hookFactory->getHookFromReflectionClass( $class );
-	$hookNames[] = "`{$hook->getName()}`: " . $hook->getDescription();
+	$hookNames[$hook->getUsableName()] = "* `{$hook->getUsableName()}`: " .
+	"\n```php\n{$hook->getMethod()->getAsInterfaceMethod()}\n```";
 }
 
 natcasesort( $hookNames );
-echo implode( "<br> * ", $hookNames );
+echo "<pre>";
+echo implode( "<br>", $hookNames );
+echo "</pre>";
 ```

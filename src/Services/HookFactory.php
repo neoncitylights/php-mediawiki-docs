@@ -13,6 +13,9 @@ use phpDocumentor\Reflection\DocBlockFactory;
 use Roave\BetterReflection\Reflection\ReflectionClass;
 use Roave\BetterReflection\Reflection\ReflectionMethod;
 
+/**
+ * @license MIT
+ */
 class HookFactory {
 	private DocBlockFactory $docBlockFactory;
 
@@ -21,16 +24,13 @@ class HookFactory {
 	}
 
 	public function getHookFromReflectionClass( ReflectionClass $hook ) : Hook {
-		$hookInterfaceDoc = $this->docBlockFactory->create( $hook->getDocComment() );
-		$hookName = $this->getHookNameForUsing( $hookInterfaceDoc->getDescription()->render() ) ?? '';
-
 		/** @var ReflectionMethod */
 		$hookMethod = $hook->getMethods()[0];
 		$hookMethodName = $hookMethod->getName();
 		$hookMethodDoc = $this->docBlockFactory->create( $hookMethod->getDocComment() );
 		$hookDescription = $hookMethodDoc->getSummary() ?? 'test';
 
-		$versionIntroduced = null;
+		$versionIntroduced = '';
 		$versionDeprecated = null;
 		$hookParams = [];
 		foreach ( $hookMethodDoc->getTags() as $tag ) {
@@ -45,14 +45,16 @@ class HookFactory {
 			if ( $tag instanceof Param ) {
 				$hookParams[] = new HookParameter(
 					$tag->getType(),
-					$tag->getName(),
+					$tag->getVariableName(),
 					$tag->getDescription() ?? ''
 				);
 			}
 		}
 
 		return new Hook(
-			$hookName,
+			$this->getUsableHookName( $hook ) ?? '',
+			$hook->getName(),
+			$hook->getFileName(),
 			$hookDescription,
 			new VersionInfo(
 				$versionIntroduced,
@@ -65,7 +67,10 @@ class HookFactory {
 		);
 	}
 
-	private function getHookNameForUsing( string $hookDescription ) : string {
+	private function getUsableHookName( ReflectionClass $hook ) : string {
+		$hookInterfaceDoc = $this->docBlockFactory->create( $hook->getDocComment() );
+		$hookDescription = $hookInterfaceDoc->getDescription()->render();
+
 		$matches = [];
 		$doesMatch = preg_match(
 			"/Use the hook name \"([A-Za-z:]+)\" to register handlers implementing this interface./",
@@ -75,8 +80,8 @@ class HookFactory {
 
 		if ( $doesMatch > 0 ) {
 			return $matches[1];
+		} else {
+			return HookUtils::normalizeFromClassName( $hook->getShortName() );
 		}
-
-		return 'something?';
 	}
 }

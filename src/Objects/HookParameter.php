@@ -27,4 +27,8 @@ class HookParameter {
 	public function getDescription() : string {
 		return $this->description;
 	}
+
+	public function getAsTypedString() : string {
+		return "{$this->types} \${$this->name}";
+	}
 }

@@ -6,12 +6,12 @@ namespace Neoncitylights\MediaWikiDocs\Objects;
  * @license MIT
  */
 class VersionInfo {
-	private ?string $versionIntroduced;
+	private string $versionIntroduced;
 	private ?string $versionDeprecated;
 	private bool $isDeprecated;
 
 	public function  __construct(
-		?string $versionIntroduced = null,
+		string $versionIntroduced,
 		?string $versionDeprecated = null
 	) {
 		$this->versionIntroduced = $versionIntroduced;
@@ -19,7 +19,7 @@ class VersionInfo {
 		$this->isDeprecated = $versionDeprecated != null ? true : false;
 	}
 
-	public function getVersionIntroduced(): ?string {
+	public function getVersionIntroduced(): string {
 		return $this->versionIntroduced;
 	}
 

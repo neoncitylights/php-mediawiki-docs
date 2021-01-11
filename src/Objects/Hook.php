@@ -6,31 +6,47 @@ namespace Neoncitylights\MediaWikiDocs\Objects;
  * @license MIT
  */
 class Hook {
-	private string $name;
+	private string $usableName;
+	private string $fullyQualifiedClassName;
+	private string $filePathName;
 	private string $description;
 	private VersionInfo $versionInfo;
 	private HookMethod $method;
 
 	/**
-	 * @param string $name
+	 * @param string $usableName
+	 * @param string $fullyQualifiedClassName
+	 * @param string $filePathName
 	 * @param string $description
 	 * @param VersionInfo $versionInfo
 	 * @param HookMethod $method
 	 */
 	public function __construct(
-		string $name,
+		string $usableName,
+		string $fullyQualifiedClassName,
+		string $filePathName,
 		string $description,
 		VersionInfo $versionInfo,
 		HookMethod $method
 	) {
-		$this->name = $name;
+		$this->usableName = $usableName;
+		$this->fullyQualifiedClassName = $fullyQualifiedClassName;
+		$this->filePathName = $filePathName;
 		$this->description = $description;
 		$this->versionInfo = $versionInfo;
 		$this->method = $method;
 	}
 
-	public function getName() : string {
-		return $this->name;
+	public function getUsableName() : string {
+		return $this->usableName;
+	}
+
+	public function getFullyQualifiedClassName() : string {
+		return $this->fullyQualifiedClassName;
+	}
+
+	public function getFilePathName() : string {
+		return $this->filePathName;
 	}
 
 	public function getDescription() : string {
