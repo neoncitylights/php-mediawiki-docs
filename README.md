@@ -4,7 +4,7 @@ It is currently experimental, and thus the public API may be changed at any time
 
 ## Software requirements
 * MediaWiki: master branch (**NOTE**: the MediaWiki core software only needs to exist in the file system)
-* PHP: 7.4.0+
+* PHP: 8.0+
 
 ## Usage
 The following example will generate text in Markdown, showing a list of hook names to their static method signature.
