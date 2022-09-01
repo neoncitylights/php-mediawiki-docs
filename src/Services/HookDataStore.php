@@ -4,7 +4,7 @@ namespace Neoncitylights\MediaWikiDocs\Services;
 
 use Roave\BetterReflection\BetterReflection;
 use Roave\BetterReflection\Reflection\ReflectionClass;
-use Roave\BetterReflection\Reflector\ClassReflector;
+use Roave\BetterReflection\Reflector\DefaultReflector;
 use Roave\BetterReflection\SourceLocator\Type\DirectoriesSourceLocator;
 
 /**
@@ -23,7 +23,7 @@ class HookDataStore {
 	/**
 	 * @return ReflectionClass[]
 	 */
-	public function loadHookData() : array {
+	public function loadHookData(): array {
 		if ( count( $this->classes ) !== 0 ) {
 			return $this->classes;
 		}
@@ -34,8 +34,8 @@ class HookDataStore {
 			$astLocator
 		);
 
-		$reflector = new ClassReflector( $directoriesSourceLocator );
-		$this->classes = $reflector->getAllClasses();
+		$reflector = new DefaultReflector( $directoriesSourceLocator );
+		$this->classes = $reflector->reflectAllClasses();
 
 		return $this->classes;
 	}
@@ -43,7 +43,7 @@ class HookDataStore {
 	/**
 	 * Clears the cached list of hooks
 	 */
-	public function clear() : void {
+	public function clear(): void {
 		$this->classes = [];
 	}
 }

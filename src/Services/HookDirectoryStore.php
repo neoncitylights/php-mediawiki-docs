@@ -22,7 +22,7 @@ class HookDirectoryStore {
 	 * Returns a cached list of every hook directory in MediaWiki, as an abosolute path
 	 * @return string[] A list of absolute paths to hook directories
 	 */
-	public function loadHookDirectories() : array {
+	public function loadHookDirectories(): array {
 		if ( count( $this->hookDirectories ) !== 0 ) {
 			return $this->hookDirectories;
 		}

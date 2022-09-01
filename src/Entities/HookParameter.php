@@ -1,6 +1,6 @@
 <?php
 
-namespace Neoncitylights\MediaWikiDocs\Objects;
+namespace Neoncitylights\MediaWikiDocs\Entities;
 
 /**
  * @license MIT
@@ -16,19 +16,19 @@ class HookParameter {
 		$this->parameters = $description;
 	}
 
-	public function getTypes() : string {
+	public function getTypes(): string {
 		return $this->types;
 	}
 
-	public function getName() : string {
+	public function getName(): string {
 		return $this->name;
 	}
 
-	public function getDescription() : string {
+	public function getDescription(): string {
 		return $this->description;
 	}
 
-	public function getAsTypedString() : string {
+	public function getAsTypedString(): string {
 		return "{$this->types} \${$this->name}";
 	}
 }

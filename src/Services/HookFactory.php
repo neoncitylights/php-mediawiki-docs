@@ -2,10 +2,10 @@
 
 namespace Neoncitylights\MediaWikiDocs\Services;
 
-use Neoncitylights\MediaWikiDocs\Objects\Hook;
-use Neoncitylights\MediaWikiDocs\Objects\HookMethod;
-use Neoncitylights\MediaWikiDocs\Objects\HookParameter;
-use Neoncitylights\MediaWikiDocs\Objects\VersionInfo;
+use Neoncitylights\MediaWikiDocs\Entities\Hook;
+use Neoncitylights\MediaWikiDocs\Entities\HookMethod;
+use Neoncitylights\MediaWikiDocs\Entities\HookParameter;
+use Neoncitylights\MediaWikiDocs\Entities\VersionInfo;
 use phpDocumentor\Reflection\DocBlock\Tags\Deprecated;
 use phpDocumentor\Reflection\DocBlock\Tags\Param;
 use phpDocumentor\Reflection\DocBlock\Tags\Since;
@@ -23,7 +23,7 @@ class HookFactory {
 		$this->docBlockFactory = $docBlockFactory;
 	}
 
-	public function getHookFromReflectionClass( ReflectionClass $hook ) : Hook {
+	public function getHookFromReflectionClass( ReflectionClass $hook ): Hook {
 		/** @var ReflectionMethod */
 		$hookMethod = $hook->getMethods()[0];
 		$hookMethodName = $hookMethod->getName();
@@ -67,7 +67,7 @@ class HookFactory {
 		);
 	}
 
-	private function getUsableHookName( ReflectionClass $hook ) : string {
+	private function getUsableHookName( ReflectionClass $hook ): string {
 		$hookInterfaceDoc = $this->docBlockFactory->create( $hook->getDocComment() );
 		$hookDescription = $hookInterfaceDoc->getDescription()->render();
 

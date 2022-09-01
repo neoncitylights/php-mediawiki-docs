@@ -1,6 +1,6 @@
 <?php
 
-namespace Neoncitylights\MediaWikiDocs\Objects;
+namespace Neoncitylights\MediaWikiDocs\Entities;
 
 /**
  * @license MIT
@@ -13,14 +13,6 @@ class Hook {
 	private VersionInfo $versionInfo;
 	private HookMethod $method;
 
-	/**
-	 * @param string $usableName
-	 * @param string $fullyQualifiedClassName
-	 * @param string $filePathName
-	 * @param string $description
-	 * @param VersionInfo $versionInfo
-	 * @param HookMethod $method
-	 */
 	public function __construct(
 		string $usableName,
 		string $fullyQualifiedClassName,
@@ -37,27 +29,27 @@ class Hook {
 		$this->method = $method;
 	}
 
-	public function getUsableName() : string {
+	public function getUsableName(): string {
 		return $this->usableName;
 	}
 
-	public function getFullyQualifiedClassName() : string {
+	public function getFullyQualifiedClassName(): string {
 		return $this->fullyQualifiedClassName;
 	}
 
-	public function getFilePathName() : string {
+	public function getFilePathName(): string {
 		return $this->filePathName;
 	}
 
-	public function getDescription() : string {
+	public function getDescription(): string {
 		return $this->description;
 	}
 
-	public function getVersionInfo() : VersionInfo {
+	public function getVersionInfo(): VersionInfo {
 		return $this->versionInfo;
 	}
 
-	public function getMethod() : HookMethod {
+	public function getMethod(): HookMethod {
 		return $this->method;
 	}
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Neoncitylights\MediaWikiDocs\Objects;
+namespace Neoncitylights\MediaWikiDocs\Entities;
 
 /**
  * @license MIT
@@ -21,24 +21,18 @@ class HookMethod {
 		$this->parameters = $parameters;
 	}
 
-	/**
-	 * @return string
-	 */
-	public function getName() : string {
+	public function getName(): string {
 		return $this->name;
 	}
 
 	/**
 	 * @return HookParameter[]
 	 */
-	public function getParameters() : array {
+	public function getParameters(): array {
 		return $this->parameters;
 	}
 
-	/**
-	 * @return string
-	 */
-	public function getAsInterfaceMethod() : string {
+	public function getAsInterfaceMethod(): string {
 		$parameters = [];
 		foreach( $this->parameters as $parameter ) {
 			$parameters[] = $parameter->getAsTypedString();
@@ -51,10 +45,7 @@ class HookMethod {
 		);
 	}
 
-	/**
-	 * @return string
-	 */
-	public function getAsTypedStaticMethod() : string {
+	public function getAsTypedStaticMethod(): string {
 		$parameters = [];
 		foreach( $this->parameters as $parameter ) {
 			$parameters[] = $parameter->getAsTypedString();

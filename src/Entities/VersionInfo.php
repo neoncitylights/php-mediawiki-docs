@@ -1,6 +1,6 @@
 <?php
 
-namespace Neoncitylights\MediaWikiDocs\Objects;
+namespace Neoncitylights\MediaWikiDocs\Entities;
 
 /**
  * @license MIT
